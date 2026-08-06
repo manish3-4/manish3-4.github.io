@@ -1,0 +1,1357 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Manish Kumar | Full Stack Developer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["Inter", "sans-serif"],
+              mono: ["JetBrains Mono", "monospace"],
+            },
+            colors: {
+              primary: {
+                50: "#eff6ff",
+                100: "#dbeafe",
+                200: "#bfdbfe",
+                300: "#93c5fd",
+                400: "#60a5fa",
+                500: "#3b82f6",
+                600: "#2563eb",
+                700: "#1d4ed8",
+                800: "#1e40af",
+                900: "#1e3a8a",
+              },
+              accent: {
+                50: "#fdf4ff",
+                100: "#fae8ff",
+                200: "#f5d0fe",
+                300: "#f0abfc",
+                400: "#e879f9",
+                500: "#d946ef",
+                600: "#c026d3",
+                700: "#a21caf",
+                800: "#86198f",
+                900: "#701a75",
+              },
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="font-sans antialiased transition-colors duration-500">
+    <!-- Animated Background -->
+    <div class="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
+      <div class="gradient-orb orb-1"></div>
+      <div class="gradient-orb orb-2"></div>
+      <div class="gradient-orb orb-3"></div>
+      <div class="mesh-bg"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav
+      class="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-white/70 dark:bg-slate-900/70 border-b border-slate-200/50 dark:border-slate-700/50 transition-all duration-500"
+      id="navbar"
+    >
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+          <a
+            href="#"
+            class="text-xl font-bold bg-gradient-to-r from-primary-600 to-accent-600 bg-clip-text text-transparent hover:scale-105 transition-transform duration-300"
+          >
+            &lt;Manish/&gt;
+          </a>
+          <div class="hidden md:flex items-center space-x-8">
+            <a
+              href="#about"
+              class="nav-link text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 font-medium transition-colors"
+              >About</a
+            >
+            <a
+              href="#experience"
+              class="nav-link text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 font-medium transition-colors"
+              >Experience</a
+            >
+            <a
+              href="#projects"
+              class="nav-link text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 font-medium transition-colors"
+              >Projects</a
+            >
+            <a
+              href="#skills"
+              class="nav-link text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 font-medium transition-colors"
+              >Skills</a
+            >
+            <a
+              href="#education"
+              class="nav-link text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 font-medium transition-colors"
+              >Education</a
+            >
+            <a
+              href="#contact"
+              class="nav-link text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 font-medium transition-colors"
+              >Contact</a
+            >
+          </div>
+          <div class="flex items-center space-x-4">
+            <button
+              id="theme-toggle"
+              class="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all duration-300 hover:scale-110"
+              aria-label="Toggle theme"
+            >
+              <svg
+                id="sun-icon"
+                class="w-5 h-5 hidden dark:block"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+                />
+              </svg>
+              <svg
+                id="moon-icon"
+                class="w-5 h-5 block dark:hidden"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+                />
+              </svg>
+            </button>
+            <button
+              id="mobile-menu-btn"
+              class="md:hidden p-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300"
+            >
+              <svg
+                class="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- Mobile Menu -->
+      <div
+        id="mobile-menu"
+        class="hidden md:hidden backdrop-blur-xl bg-white/90 dark:bg-slate-900/90 border-b border-slate-200/50 dark:border-slate-700/50"
+      >
+        <div class="px-4 py-4 space-y-3">
+          <a
+            href="#about"
+            class="block text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 font-medium"
+            >About</a
+          >
+          <a
+            href="#experience"
+            class="block text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 font-medium"
+            >Experience</a
+          >
+          <a
+            href="#projects"
+            class="block text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 font-medium"
+            >Projects</a
+          >
+          <a
+            href="#skills"
+            class="block text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 font-medium"
+            >Skills</a
+          >
+          <a
+            href="#education"
+            class="block text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 font-medium"
+            >Education</a
+          >
+          <a
+            href="#contact"
+            class="block text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 font-medium"
+            >Contact</a
+          >
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section
+      id="about"
+      class="min-h-screen flex items-center justify-center pt-16 relative overflow-hidden"
+    >
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+          <div class="space-y-8">
+            <div class="space-y-4">
+              <div
+                class="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 text-sm font-medium animate-fade-in-up"
+              >
+                <span
+                  class="w-2 h-2 rounded-full bg-green-500 animate-pulse"
+                ></span>
+                <span>Available for opportunities</span>
+              </div>
+              <h1
+                class="text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight animate-fade-in-up"
+                style="animation-delay: 0.1s"
+              >
+                <span class="text-slate-900 dark:text-white">Hi, I'm</span
+                ><br />
+                <span
+                  class="bg-gradient-to-r from-primary-600 via-accent-500 to-primary-600 bg-clip-text text-transparent animate-gradient"
+                  >Manish Kumar</span
+                >
+              </h1>
+              <p
+                class="text-xl sm:text-2xl text-slate-600 dark:text-slate-300 font-medium animate-fade-in-up"
+                style="animation-delay: 0.2s"
+              >
+                Full Stack Developer
+              </p>
+              <p
+                class="text-slate-500 dark:text-slate-400 text-lg leading-relaxed max-w-xl animate-fade-in-up"
+                style="animation-delay: 0.3s"
+              >
+                Building real-world web applications with the MERN stack.
+                Passionate about secure REST APIs, responsive UIs, and scalable
+                solutions that solve practical problems.
+              </p>
+            </div>
+            <div
+              class="flex flex-wrap gap-4 animate-fade-in-up"
+              style="animation-delay: 0.4s"
+            >
+              <a
+                href="#projects"
+                class="group px-8 py-3 rounded-xl bg-gradient-to-r from-primary-600 to-accent-600 text-white font-semibold hover:shadow-lg hover:shadow-primary-500/25 transition-all duration-300 hover:-translate-y-1"
+              >
+                View Projects
+                <svg
+                  class="inline-block w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M17 8l4 4m0 0l-4 4m4-4H3"
+                  />
+                </svg>
+              </a>
+              <a
+                href="#contact"
+                class="px-8 py-3 rounded-xl border-2 border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 font-semibold hover:border-primary-500 dark:hover:border-primary-400 hover:text-primary-600 dark:hover:text-primary-400 transition-all duration-300 hover:-translate-y-1"
+              >
+                Get in Touch
+              </a>
+            </div>
+            <div
+              class="flex items-center space-x-6 animate-fade-in-up"
+              style="animation-delay: 0.5s"
+            >
+              <a
+                href="https://github.com/manish3-4"
+                target="_blank"
+                class="social-icon p-3 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-900 hover:text-white dark:hover:bg-white dark:hover:text-slate-900 transition-all duration-300 hover:scale-110"
+              >
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path
+                    d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
+                  />
+                </svg>
+              </a>
+              <a
+                href="https://linkedin.com/in/manishkumar237"
+                target="_blank"
+                class="social-icon p-3 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-[#0077b5] hover:text-white transition-all duration-300 hover:scale-110"
+              >
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path
+                    d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
+                  />
+                </svg>
+              </a>
+              <a
+                href="mailto:mk743953@gmail.com"
+                class="social-icon p-3 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-red-500 hover:text-white transition-all duration-300 hover:scale-110"
+              >
+                <svg
+                  class="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                  />
+                </svg>
+              </a>
+            </div>
+          </div>
+          <div class="relative hidden lg:block">
+            <div class="relative w-80 h-80 mx-auto">
+              <div
+                class="absolute inset-0 rounded-3xl bg-gradient-to-br from-primary-500 to-accent-500 rotate-6 opacity-20 animate-float"
+              ></div>
+              <div
+                class="absolute inset-0 rounded-3xl bg-gradient-to-br from-primary-500 to-accent-500 -rotate-6 opacity-20 animate-float"
+                style="animation-delay: 1s"
+              ></div>
+              <div
+                class="relative w-full h-full rounded-3xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center overflow-hidden"
+              >
+                <img
+                  src="https://media.licdn.com/dms/image/v2/D4D03AQFn58FHrmLNDQ/profile-displayphoto-crop_800_800/B4DZ8fW5dbJQAI-/0/1782937526547?e=1787788800&v=beta&t=uyyX2aNenMfk89xmeKqDvGifj0UwN8podkp6HZVVIi8"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+        <svg
+          class="w-6 h-6 text-slate-400"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M19 14l-7 7m0 0l-7-7m7 7V3"
+          />
+        </svg>
+      </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-24 relative">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16 scroll-reveal">
+          <span
+            class="inline-block px-4 py-1 rounded-full bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 text-sm font-medium mb-4"
+            >Experience</span
+          >
+          <h2
+            class="text-4xl sm:text-5xl font-bold text-slate-900 dark:text-white"
+          >
+            Work Experience
+          </h2>
+        </div>
+        <div class="max-w-4xl mx-auto">
+          <div class="relative">
+            <div
+              class="absolute left-4 sm:left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary-500 to-accent-500"
+            ></div>
+            <div class="space-y-12">
+              <div class="relative pl-12 sm:pl-20 scroll-reveal">
+                <div
+                  class="absolute left-2 sm:left-6 top-0 w-4 h-4 rounded-full bg-primary-500 border-4 border-white dark:border-slate-900 shadow-lg"
+                ></div>
+                <div
+                  class="card-hover p-6 sm:p-8 rounded-2xl bg-white/60 dark:bg-slate-800/60 backdrop-blur-sm border border-slate-200/50 dark:border-slate-700/50"
+                >
+                  <div
+                    class="flex flex-wrap items-start justify-between gap-4 mb-4"
+                  >
+                    <div>
+                      <h3
+                        class="text-xl font-bold text-slate-900 dark:text-white"
+                      >
+                        Full Stack Developer Intern
+                      </h3>
+                      <p
+                        class="text-primary-600 dark:text-primary-400 font-medium"
+                      >
+                        Odnest Edutech Pvt Ltd
+                      </p>
+                    </div>
+                    <span
+                      class="px-3 py-1 rounded-full bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 text-sm font-medium"
+                      >Feb 2026 - Jul 2026</span
+                    >
+                  </div>
+                  <p class="text-slate-500 dark:text-slate-400 text-sm mb-4">
+                    Bangalore, India
+                  </p>
+                  <ul class="space-y-2 text-slate-600 dark:text-slate-300">
+                    <li class="flex items-start">
+                      <svg
+                        class="w-5 h-5 text-primary-500 mr-2 mt-0.5 flex-shrink-0"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M5 13l4 4L19 7"
+                        />
+                      </svg>
+                      Built SaaS features using MERN stack with secure JWT-based
+                      REST APIs in agile/scrum, improving security by 10% and
+                      tested for 1000 concurrent virtual requests using K6
+                    </li>
+                    <li class="flex items-start">
+                      <svg
+                        class="w-5 h-5 text-primary-500 mr-2 mt-0.5 flex-shrink-0"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M5 13l4 4L19 7"
+                        />
+                      </svg>
+                      Deployed applications on Vercel and Render, targeting
+                      zero-downtime for 1000+ users
+                    </li>
+                    <li class="flex items-start">
+                      <svg
+                        class="w-5 h-5 text-primary-500 mr-2 mt-0.5 flex-shrink-0"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M5 13l4 4L19 7"
+                        />
+                      </svg>
+                      Improved code quality through AI-assisted code reviews and
+                      refactoring, reducing technical debt
+                    </li>
+                  </ul>
+                  <div class="mt-4 flex flex-wrap gap-2">
+                    <span
+                      class="px-3 py-1 rounded-lg bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 text-xs font-medium"
+                      >Java</span
+                    >
+                    <span
+                      class="px-3 py-1 rounded-lg bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 text-xs font-medium"
+                      >Spring Boot</span
+                    >
+                    <span
+                      class="px-3 py-1 rounded-lg bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 text-xs font-medium"
+                      >Node.js</span
+                    >
+                    <span
+                      class="px-3 py-1 rounded-lg bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 text-xs font-medium"
+                      >React.js</span
+                    >
+                    <span
+                      class="px-3 py-1 rounded-lg bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 text-xs font-medium"
+                      >MongoDB</span
+                    >
+                    <span
+                      class="px-3 py-1 rounded-lg bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 text-xs font-medium"
+                      >AWS</span
+                    >
+                    <span
+                      class="px-3 py-1 rounded-lg bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 text-xs font-medium"
+                      >GitHub Actions</span
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-24 relative">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16 scroll-reveal">
+          <span
+            class="inline-block px-4 py-1 rounded-full bg-accent-100 dark:bg-accent-900/30 text-accent-700 dark:text-accent-300 text-sm font-medium mb-4"
+            >Projects</span
+          >
+          <h2
+            class="text-4xl sm:text-5xl font-bold text-slate-900 dark:text-white"
+          >
+            Featured Projects
+          </h2>
+        </div>
+        <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+          <!-- SnapBite -->
+          <div class="project-card scroll-reveal group">
+            <div
+              class="h-full rounded-2xl bg-white/60 dark:bg-slate-800/60 backdrop-blur-sm border border-slate-200/50 dark:border-slate-700/50 overflow-hidden hover:shadow-xl hover:shadow-primary-500/10 transition-all duration-500"
+            >
+              <div
+                class="h-48 bg-gradient-to-br from-orange-400 via-red-500 to-pink-500 relative overflow-hidden"
+              >
+                <div class="absolute inset-0 bg-black/10"></div>
+                <div class="absolute inset-0 flex items-center justify-center">
+                  <div class="text-white text-center">
+                    <div class="text-5xl mb-2">&#127828;</div>
+                    <h3 class="text-2xl font-bold">SnapBite</h3>
+                  </div>
+                </div>
+                <div class="absolute top-4 right-4 flex gap-2">
+                  <span
+                    class="px-2 py-1 rounded-lg bg-white/20 backdrop-blur-sm text-white text-xs font-medium"
+                    >Full Stack</span
+                  >
+                </div>
+              </div>
+              <div class="p-6">
+                <p
+                  class="text-slate-600 dark:text-slate-300 mb-4 leading-relaxed"
+                >
+                  A full-stack food delivery platform with real-time delivery
+                  tracking, secure admin panel, and JWT-based authentication.
+                </p>
+                <ul
+                  class="space-y-1 text-sm text-slate-500 dark:text-slate-400 mb-4"
+                >
+                  <li class="flex items-center">
+                    <span
+                      class="w-1.5 h-1.5 rounded-full bg-primary-500 mr-2"
+                    ></span
+                    >Real-time delivery status dashboard
+                  </li>
+                  <li class="flex items-center">
+                    <span
+                      class="w-1.5 h-1.5 rounded-full bg-primary-500 mr-2"
+                    ></span
+                    >Secure admin panel for order management
+                  </li>
+                  <li class="flex items-center">
+                    <span
+                      class="w-1.5 h-1.5 rounded-full bg-primary-500 mr-2"
+                    ></span
+                    >Load tested with 1000 virtual users via k6
+                  </li>
+                  <li class="flex items-center">
+                    <span
+                      class="w-1.5 h-1.5 rounded-full bg-primary-500 mr-2"
+                    ></span
+                    >Razorpay payment integration
+                  </li>
+                </ul>
+                <div class="flex flex-wrap gap-2 mb-4">
+                  <span
+                    class="px-2 py-1 rounded-md bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300 text-xs"
+                    >Node.js</span
+                  >
+                  <span
+                    class="px-2 py-1 rounded-md bg-cyan-100 dark:bg-cyan-900/30 text-cyan-700 dark:text-cyan-300 text-xs"
+                    >Express.js</span
+                  >
+                  <span
+                    class="px-2 py-1 rounded-md bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-xs"
+                    >React.js</span
+                  >
+                  <span
+                    class="px-2 py-1 rounded-md bg-teal-100 dark:bg-teal-900/30 text-teal-700 dark:text-teal-300 text-xs"
+                    >Tailwind CSS</span
+                  >
+                  <span
+                    class="px-2 py-1 rounded-md bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 text-xs"
+                    >MongoDB</span
+                  >
+                </div>
+                <div class="flex gap-3">
+                  <a
+                    href="#"
+                    class="flex-1 text-center px-4 py-2 rounded-lg bg-primary-600 text-white text-sm font-medium hover:bg-primary-700 transition-colors"
+                    >Live Demo</a
+                  >
+                  <a
+                    href="#"
+                    class="flex-1 text-center px-4 py-2 rounded-lg border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 text-sm font-medium hover:border-primary-500 transition-colors"
+                    >GitHub</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- ApnaBank -->
+          <div class="project-card scroll-reveal group">
+            <div
+              class="h-full rounded-2xl bg-white/60 dark:bg-slate-800/60 backdrop-blur-sm border border-slate-200/50 dark:border-slate-700/50 overflow-hidden hover:shadow-xl hover:shadow-accent-500/10 transition-all duration-500"
+            >
+              <div
+                class="h-48 bg-gradient-to-br from-emerald-400 via-teal-500 to-cyan-600 relative overflow-hidden"
+              >
+                <div class="absolute inset-0 bg-black/10"></div>
+                <div class="absolute inset-0 flex items-center justify-center">
+                  <div class="text-white text-center">
+                    <div class="text-5xl mb-2">&#127974;</div>
+                    <h3 class="text-2xl font-bold">ApnaBank</h3>
+                  </div>
+                </div>
+                <div class="absolute top-4 right-4 flex gap-2">
+                  <span
+                    class="px-2 py-1 rounded-lg bg-white/20 backdrop-blur-sm text-white text-xs font-medium"
+                    >Full Stack</span
+                  >
+                </div>
+              </div>
+              <div class="p-6">
+                <p
+                  class="text-slate-600 dark:text-slate-300 mb-4 leading-relaxed"
+                >
+                  A digital banking application with account management, fund
+                  transfers, transaction history, and role-based authorization.
+                </p>
+                <ul
+                  class="space-y-1 text-sm text-slate-500 dark:text-slate-400 mb-4"
+                >
+                  <li class="flex items-center">
+                    <span
+                      class="w-1.5 h-1.5 rounded-full bg-accent-500 mr-2"
+                    ></span
+                    >JWT authentication & role-based access
+                  </li>
+                  <li class="flex items-center">
+                    <span
+                      class="w-1.5 h-1.5 rounded-full bg-accent-500 mr-2"
+                    ></span
+                    >Fund transfers & transaction history
+                  </li>
+                  <li class="flex items-center">
+                    <span
+                      class="w-1.5 h-1.5 rounded-full bg-accent-500 mr-2"
+                    ></span
+                    >Normalized PostgreSQL schemas
+                  </li>
+                  <li class="flex items-center">
+                    <span
+                      class="w-1.5 h-1.5 rounded-full bg-accent-500 mr-2"
+                    ></span
+                    >Robust input validation
+                  </li>
+                </ul>
+                <div class="flex flex-wrap gap-2 mb-4">
+                  <span
+                    class="px-2 py-1 rounded-md bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-xs"
+                    >React.js</span
+                  >
+                  <span
+                    class="px-2 py-1 rounded-md bg-teal-100 dark:bg-teal-900/30 text-teal-700 dark:text-teal-300 text-xs"
+                    >Tailwind CSS</span
+                  >
+                  <span
+                    class="px-2 py-1 rounded-md bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300 text-xs"
+                    >Node.js</span
+                  >
+                  <span
+                    class="px-2 py-1 rounded-md bg-cyan-100 dark:bg-cyan-900/30 text-cyan-700 dark:text-cyan-300 text-xs"
+                    >Express.js</span
+                  >
+                  <span
+                    class="px-2 py-1 rounded-md bg-indigo-100 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300 text-xs"
+                    >PostgreSQL</span
+                  >
+                </div>
+                <div class="flex gap-3">
+                  <a
+                    href="#"
+                    class="flex-1 text-center px-4 py-2 rounded-lg bg-accent-600 text-white text-sm font-medium hover:bg-accent-700 transition-colors"
+                    >Live Demo</a
+                  >
+                  <a
+                    href="#"
+                    class="flex-1 text-center px-4 py-2 rounded-lg border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 text-sm font-medium hover:border-accent-500 transition-colors"
+                    >GitHub</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-24 relative">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16 scroll-reveal">
+          <span
+            class="inline-block px-4 py-1 rounded-full bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 text-sm font-medium mb-4"
+            >Skills</span
+          >
+          <h2
+            class="text-4xl sm:text-5xl font-bold text-slate-900 dark:text-white"
+          >
+            Tech Stack
+          </h2>
+        </div>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+          <div
+            class="skill-card scroll-reveal p-6 rounded-2xl bg-white/60 dark:bg-slate-800/60 backdrop-blur-sm border border-slate-200/50 dark:border-slate-700/50 hover:shadow-lg transition-all duration-300"
+          >
+            <div class="flex items-center space-x-3 mb-4">
+              <div
+                class="p-3 rounded-xl bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400"
+              >
+                <svg
+                  class="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
+                  />
+                </svg>
+              </div>
+              <h3 class="text-lg font-bold text-slate-900 dark:text-white">
+                Languages
+              </h3>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <span
+                class="skill-tag px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 text-sm font-medium"
+                >C++</span
+              >
+              <span
+                class="skill-tag px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 text-sm font-medium"
+                >Java</span
+              >
+              <span
+                class="skill-tag px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 text-sm font-medium"
+                >JavaScript</span
+              >
+              <span
+                class="skill-tag px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 text-sm font-medium"
+                >TypeScript</span
+              >
+            </div>
+          </div>
+          <div
+            class="skill-card scroll-reveal p-6 rounded-2xl bg-white/60 dark:bg-slate-800/60 backdrop-blur-sm border border-slate-200/50 dark:border-slate-700/50 hover:shadow-lg transition-all duration-300"
+          >
+            <div class="flex items-center space-x-3 mb-4">
+              <div
+                class="p-3 rounded-xl bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400"
+              >
+                <svg
+                  class="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                  />
+                </svg>
+              </div>
+              <h3 class="text-lg font-bold text-slate-900 dark:text-white">
+                Frontend
+              </h3>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <span
+                class="skill-tag px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 text-sm font-medium"
+                >React.js</span
+              >
+              <span
+                class="skill-tag px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 text-sm font-medium"
+                >React Native</span
+              >
+              <span
+                class="skill-tag px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 text-sm font-medium"
+                >Tailwind CSS</span
+              >
+            </div>
+          </div>
+          <div
+            class="skill-card scroll-reveal p-6 rounded-2xl bg-white/60 dark:bg-slate-800/60 backdrop-blur-sm border border-slate-200/50 dark:border-slate-700/50 hover:shadow-lg transition-all duration-300"
+          >
+            <div class="flex items-center space-x-3 mb-4">
+              <div
+                class="p-3 rounded-xl bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400"
+              >
+                <svg
+                  class="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 01-2 2v4a2 2 0 012 2h14a2 2 0 012-2v-4a2 2 0 01-2-2m-2-4h.01M17 16h.01"
+                  />
+                </svg>
+              </div>
+              <h3 class="text-lg font-bold text-slate-900 dark:text-white">
+                Backend
+              </h3>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <span
+                class="skill-tag px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 text-sm font-medium"
+                >Node.js</span
+              >
+              <span
+                class="skill-tag px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 text-sm font-medium"
+                >Express.js</span
+              >
+              <span
+                class="skill-tag px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 text-sm font-medium"
+                >Spring Boot</span
+              >
+              <span
+                class="skill-tag px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 text-sm font-medium"
+                >REST APIs</span
+              >
+              <span
+                class="skill-tag px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 text-sm font-medium"
+                >JWT Auth</span
+              >
+            </div>
+          </div>
+          <div
+            class="skill-card scroll-reveal p-6 rounded-2xl bg-white/60 dark:bg-slate-800/60 backdrop-blur-sm border border-slate-200/50 dark:border-slate-700/50 hover:shadow-lg transition-all duration-300"
+          >
+            <div class="flex items-center space-x-3 mb-4">
+              <div
+                class="p-3 rounded-xl bg-yellow-100 dark:bg-yellow-900/30 text-yellow-600 dark:text-yellow-400"
+              >
+                <svg
+                  class="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"
+                  />
+                </svg>
+              </div>
+              <h3 class="text-lg font-bold text-slate-900 dark:text-white">
+                Databases
+              </h3>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <span
+                class="skill-tag px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 text-sm font-medium"
+                >MongoDB</span
+              >
+              <span
+                class="skill-tag px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 text-sm font-medium"
+                >PostgreSQL</span
+              >
+              <span
+                class="skill-tag px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 text-sm font-medium"
+                >MySQL</span
+              >
+              <span
+                class="skill-tag px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 text-sm font-medium"
+                >Redis</span
+              >
+            </div>
+          </div>
+          <div
+            class="skill-card scroll-reveal p-6 rounded-2xl bg-white/60 dark:bg-slate-800/60 backdrop-blur-sm border border-slate-200/50 dark:border-slate-700/50 hover:shadow-lg transition-all duration-300"
+          >
+            <div class="flex items-center space-x-3 mb-4">
+              <div
+                class="p-3 rounded-xl bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400"
+              >
+                <svg
+                  class="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"
+                  />
+                </svg>
+              </div>
+              <h3 class="text-lg font-bold text-slate-900 dark:text-white">
+                Cloud & DevOps
+              </h3>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <span
+                class="skill-tag px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 text-sm font-medium"
+                >AWS (EC2, S3)</span
+              >
+              <span
+                class="skill-tag px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 text-sm font-medium"
+                >Docker</span
+              >
+              <span
+                class="skill-tag px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 text-sm font-medium"
+                >GitHub Actions</span
+              >
+              <span
+                class="skill-tag px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 text-sm font-medium"
+                >Vercel</span
+              >
+              <span
+                class="skill-tag px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 text-sm font-medium"
+                >Render</span
+              >
+            </div>
+          </div>
+          <div
+            class="skill-card scroll-reveal p-6 rounded-2xl bg-white/60 dark:bg-slate-800/60 backdrop-blur-sm border border-slate-200/50 dark:border-slate-700/50 hover:shadow-lg transition-all duration-300"
+          >
+            <div class="flex items-center space-x-3 mb-4">
+              <div
+                class="p-3 rounded-xl bg-pink-100 dark:bg-pink-900/30 text-pink-600 dark:text-pink-400"
+              >
+                <svg
+                  class="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z"
+                  />
+                </svg>
+              </div>
+              <h3 class="text-lg font-bold text-slate-900 dark:text-white">
+                Tools & Testing
+              </h3>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <span
+                class="skill-tag px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 text-sm font-medium"
+                >Git</span
+              >
+              <span
+                class="skill-tag px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 text-sm font-medium"
+                >GitHub</span
+              >
+              <span
+                class="skill-tag px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 text-sm font-medium"
+                >K6</span
+              >
+              <span
+                class="skill-tag px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 text-sm font-medium"
+                >Jest</span
+              >
+              <span
+                class="skill-tag px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 text-sm font-medium"
+                >Postman</span
+              >
+              <span
+                class="skill-tag px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 text-sm font-medium"
+                >Linux</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="py-24 relative">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16 scroll-reveal">
+          <span
+            class="inline-block px-4 py-1 rounded-full bg-accent-100 dark:bg-accent-900/30 text-accent-700 dark:text-accent-300 text-sm font-medium mb-4"
+            >Education</span
+          >
+          <h2
+            class="text-4xl sm:text-5xl font-bold text-slate-900 dark:text-white"
+          >
+            Education
+          </h2>
+        </div>
+        <div class="max-w-3xl mx-auto">
+          <div
+            class="scroll-reveal p-8 rounded-2xl bg-white/60 dark:bg-slate-800/60 backdrop-blur-sm border border-slate-200/50 dark:border-slate-700/50 hover:shadow-lg transition-all duration-300"
+          >
+            <div class="flex flex-wrap items-start justify-between gap-4 mb-4">
+              <div class="flex items-start space-x-4">
+                <div
+                  class="p-3 rounded-xl bg-primary-100 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400"
+                >
+                  <svg
+                    class="w-8 h-8"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M12 14l9-5-9-5-9 5 9 5z"
+                    />
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"
+                    />
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"
+                    />
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="text-xl font-bold text-slate-900 dark:text-white">
+                    B.Tech in Computer Science & Engineering
+                  </h3>
+                  <p class="text-primary-600 dark:text-primary-400 font-medium">
+                    Lovely Professional University
+                  </p>
+                  <p class="text-slate-500 dark:text-slate-400 text-sm">
+                    Punjab, India
+                  </p>
+                </div>
+              </div>
+              <div class="text-right">
+                <span
+                  class="px-3 py-1 rounded-full bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 text-sm font-medium"
+                  >July 2022 - Jun 2026</span
+                >
+                <p
+                  class="text-slate-600 dark:text-slate-300 font-semibold mt-2"
+                >
+                  GPA: 7.68/10
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Certificates & Achievements -->
+    <section class="py-24 relative">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16 scroll-reveal">
+          <span
+            class="inline-block px-4 py-1 rounded-full bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 text-sm font-medium mb-4"
+            >Achievements</span
+          >
+          <h2
+            class="text-4xl sm:text-5xl font-bold text-slate-900 dark:text-white"
+          >
+            Certificates & Achievements
+          </h2>
+        </div>
+        <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+          <div
+            class="scroll-reveal p-6 rounded-2xl bg-white/60 dark:bg-slate-800/60 backdrop-blur-sm border border-slate-200/50 dark:border-slate-700/50 hover:shadow-lg transition-all duration-300"
+          >
+            <h3
+              class="text-xl font-bold text-slate-900 dark:text-white mb-4 flex items-center"
+            >
+              <svg
+                class="w-6 h-6 mr-2 text-primary-500"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"
+                />
+              </svg>
+              Certificates
+            </h3>
+            <ul class="space-y-3">
+              <li class="flex items-center text-slate-600 dark:text-slate-300">
+                <span class="w-2 h-2 rounded-full bg-primary-500 mr-3"></span
+                >IBM - Java Developer
+              </li>
+              <li class="flex items-center text-slate-600 dark:text-slate-300">
+                <span class="w-2 h-2 rounded-full bg-primary-500 mr-3"></span
+                >MERN Stack Developer (CipherSchools)
+              </li>
+              <li class="flex items-center text-slate-600 dark:text-slate-300">
+                <span class="w-2 h-2 rounded-full bg-primary-500 mr-3"></span
+                >Google UX Design
+              </li>
+              <li class="flex items-center text-slate-600 dark:text-slate-300">
+                <span class="w-2 h-2 rounded-full bg-primary-500 mr-3"></span
+                >Meta - React Native
+              </li>
+              <li class="flex items-center text-slate-600 dark:text-slate-300">
+                <span class="w-2 h-2 rounded-full bg-primary-500 mr-3"></span
+                >AWS Fundamentals
+              </li>
+              <li class="flex items-center text-slate-600 dark:text-slate-300">
+                <span class="w-2 h-2 rounded-full bg-primary-500 mr-3"></span
+                >Oracle Certified Professional (GenAI)
+              </li>
+              <li class="flex items-center text-slate-600 dark:text-slate-300">
+                <span class="w-2 h-2 rounded-full bg-primary-500 mr-3"></span
+                >Oracle Certified Associate (SQL)
+              </li>
+            </ul>
+          </div>
+          <div
+            class="scroll-reveal p-6 rounded-2xl bg-white/60 dark:bg-slate-800/60 backdrop-blur-sm border border-slate-200/50 dark:border-slate-700/50 hover:shadow-lg transition-all duration-300"
+          >
+            <h3
+              class="text-xl font-bold text-slate-900 dark:text-white mb-4 flex items-center"
+            >
+              <svg
+                class="w-6 h-6 mr-2 text-accent-500"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"
+                />
+              </svg>
+              Achievements
+            </h3>
+            <ul class="space-y-3">
+              <li class="flex items-start text-slate-600 dark:text-slate-300">
+                <span
+                  class="w-2 h-2 rounded-full bg-accent-500 mr-3 mt-2"
+                ></span
+                ><span
+                  >Solved
+                  <strong class="text-slate-900 dark:text-white">550+</strong>
+                  DSA problems on GFG & LeetCode</span
+                >
+              </li>
+              <li class="flex items-start text-slate-600 dark:text-slate-300">
+                <span
+                  class="w-2 h-2 rounded-full bg-accent-500 mr-3 mt-2"
+                ></span
+                ><span
+                  >Achieved
+                  <strong class="text-slate-900 dark:text-white">1800+</strong>
+                  competitive programming rating</span
+                >
+              </li>
+              <li class="flex items-start text-slate-600 dark:text-slate-300">
+                <span
+                  class="w-2 h-2 rounded-full bg-accent-500 mr-3 mt-2"
+                ></span
+                ><span
+                  ><strong class="text-slate-900 dark:text-white">Top 5</strong>
+                  position in Hack Vega Hackathon</span
+                >
+              </li>
+              <li class="flex items-start text-slate-600 dark:text-slate-300">
+                <span
+                  class="w-2 h-2 rounded-full bg-accent-500 mr-3 mt-2"
+                ></span
+                ><span
+                  ><strong class="text-slate-900 dark:text-white">A+</strong>
+                  grade in Computer Networking</span
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 relative">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16 scroll-reveal">
+          <span
+            class="inline-block px-4 py-1 rounded-full bg-accent-100 dark:bg-accent-900/30 text-accent-700 dark:text-accent-300 text-sm font-medium mb-4"
+            >Contact</span
+          >
+          <h2
+            class="text-4xl sm:text-5xl font-bold text-slate-900 dark:text-white"
+          >
+            Get In Touch
+          </h2>
+          <p class="text-slate-500 dark:text-slate-400 mt-4 max-w-2xl mx-auto">
+            I'm always open to discussing new opportunities, creative projects,
+            or just having a chat about tech.
+          </p>
+        </div>
+        <div class="max-w-2xl mx-auto">
+          <div class="grid sm:grid-cols-3 gap-6 scroll-reveal">
+            <a
+              href="mailto:mk743953@gmail.com"
+              class="group p-6 rounded-2xl bg-white/60 dark:bg-slate-800/60 backdrop-blur-sm border border-slate-200/50 dark:border-slate-700/50 text-center hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+            >
+              <div
+                class="p-3 rounded-xl bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 w-fit mx-auto mb-3 group-hover:scale-110 transition-transform"
+              >
+                <svg
+                  class="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                  />
+                </svg>
+              </div>
+              <h3 class="font-semibold text-slate-900 dark:text-white">
+                Email
+              </h3>
+              <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">
+                mk743953@gmail.com
+              </p>
+            </a>
+            <a
+              href="tel:+919997556686"
+              class="group p-6 rounded-2xl bg-white/60 dark:bg-slate-800/60 backdrop-blur-sm border border-slate-200/50 dark:border-slate-700/50 text-center hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+            >
+              <div
+                class="p-3 rounded-xl bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 w-fit mx-auto mb-3 group-hover:scale-110 transition-transform"
+              >
+                <svg
+                  class="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                  />
+                </svg>
+              </div>
+              <h3 class="font-semibold text-slate-900 dark:text-white">
+                Phone
+              </h3>
+              <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">
+                +91 9997556686
+              </p>
+            </a>
+            <a
+              href="https://linkedin.com/in/manishkumar237"
+              target="_blank"
+              class="group p-6 rounded-2xl bg-white/60 dark:bg-slate-800/60 backdrop-blur-sm border border-slate-200/50 dark:border-slate-700/50 text-center hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+            >
+              <div
+                class="p-3 rounded-xl bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 w-fit mx-auto mb-3 group-hover:scale-110 transition-transform"
+              >
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path
+                    d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
+                  />
+                </svg>
+              </div>
+              <h3 class="font-semibold text-slate-900 dark:text-white">
+                LinkedIn
+              </h3>
+              <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">
+                manishkumar237
+              </p>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 border-t border-slate-200/50 dark:border-slate-700/50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div
+          class="flex flex-col sm:flex-row items-center justify-between gap-4"
+        >
+          <p class="text-slate-500 dark:text-slate-400 text-sm">
+            &copy; 2026 Manish Kumar. Built with passion & code.
+          </p>
+          <div class="flex items-center space-x-4">
+            <a
+              href="https://github.com/manish3-4"
+              target="_blank"
+              class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors"
+            >
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
+                />
+              </svg>
+            </a>
+            <a
+              href="https://linkedin.com/in/manishkumar237"
+              target="_blank"
+              class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors"
+            >
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
+                />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>

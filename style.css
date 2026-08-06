@@ -1,0 +1,608 @@
+/* ============================================
+   MANISH KUMAR PORTFOLIO - STYLES
+   ============================================ */
+
+/* CSS Variables for theming */
+:root {
+    --bg-primary: #f8fafc;
+    --bg-secondary: #ffffff;
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --text-muted: #94a3b8;
+    --border-color: #e2e8f0;
+    --card-bg: rgba(255, 255, 255, 0.6);
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    --shadow-glow: 0 0 40px rgba(59, 130, 246, 0.15);
+}
+
+.dark {
+    --bg-primary: #0f172a;
+    --bg-secondary: #1e293b;
+    --text-primary: #f1f5f9;
+    --text-secondary: #cbd5e1;
+    --text-muted: #64748b;
+    --border-color: #334155;
+    --card-bg: rgba(30, 41, 59, 0.6);
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
+    --shadow-glow: 0 0 40px rgba(139, 92, 246, 0.15);
+}
+
+/* Base styles */
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+/* ============================================
+   ANIMATED BACKGROUND ORBS
+   ============================================ */
+.gradient-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.4;
+    animation: orbFloat 20s ease-in-out infinite;
+}
+
+.orb-1 {
+    width: 500px;
+    height: 500px;
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    top: -10%;
+    left: -10%;
+    animation-delay: 0s;
+}
+
+.orb-2 {
+    width: 400px;
+    height: 400px;
+    background: linear-gradient(135deg, #ec4899, #f43f5e);
+    top: 40%;
+    right: -5%;
+    animation-delay: -7s;
+}
+
+.orb-3 {
+    width: 350px;
+    height: 350px;
+    background: linear-gradient(135deg, #06b6d4, #3b82f6);
+    bottom: 10%;
+    left: 20%;
+    animation-delay: -14s;
+}
+
+.dark .orb-1 {
+    background: linear-gradient(135deg, #1e40af, #5b21b6);
+    opacity: 0.2;
+}
+
+.dark .orb-2 {
+    background: linear-gradient(135deg, #be185d, #9f1239);
+    opacity: 0.2;
+}
+
+.dark .orb-3 {
+    background: linear-gradient(135deg, #0e7490, #1e40af);
+    opacity: 0.2;
+}
+
+@keyframes orbFloat {
+    0%, 100% {
+        transform: translate(0, 0) scale(1);
+    }
+    25% {
+        transform: translate(50px, -30px) scale(1.1);
+    }
+    50% {
+        transform: translate(-30px, 50px) scale(0.95);
+    }
+    75% {
+        transform: translate(20px, 20px) scale(1.05);
+    }
+}
+
+/* Mesh background pattern */
+.mesh-bg {
+    position: absolute;
+    inset: 0;
+    background-image: 
+        radial-gradient(circle at 1px 1px, rgba(148, 163, 184, 0.15) 1px, transparent 0);
+    background-size: 40px 40px;
+    mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+    -webkit-mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+}
+
+.dark .mesh-bg {
+    background-image: 
+        radial-gradient(circle at 1px 1px, rgba(148, 163, 184, 0.08) 1px, transparent 0);
+}
+
+/* ============================================
+   ANIMATED GRADIENT TEXT
+   ============================================ */
+.animate-gradient {
+    background-size: 200% auto;
+    animation: gradientShift 3s ease infinite;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% center; }
+    50% { background-position: 100% center; }
+    100% { background-position: 0% center; }
+}
+
+/* ============================================
+   FLOAT ANIMATION
+   ============================================ */
+.animate-float {
+    animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-20px) rotate(2deg);
+    }
+}
+
+/* ============================================
+   FADE IN UP ANIMATION
+   ============================================ */
+.animate-fade-in-up {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.8s ease forwards;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ============================================
+   SCROLL REVEAL ANIMATION
+   ============================================ */
+.scroll-reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.scroll-reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Stagger children */
+.scroll-reveal:nth-child(1) { transition-delay: 0s; }
+.scroll-reveal:nth-child(2) { transition-delay: 0.1s; }
+.scroll-reveal:nth-child(3) { transition-delay: 0.2s; }
+.scroll-reveal:nth-child(4) { transition-delay: 0.3s; }
+.scroll-reveal:nth-child(5) { transition-delay: 0.4s; }
+.scroll-reveal:nth-child(6) { transition-delay: 0.5s; }
+
+/* ============================================
+   CARD HOVER EFFECTS
+   ============================================ */
+.card-hover {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-hover:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg), var(--shadow-glow);
+}
+
+/* ============================================
+   PROJECT CARD EFFECTS
+   ============================================ */
+.project-card {
+    transition: transform 0.4s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-8px);
+}
+
+.project-card .h-full {
+    transition: box-shadow 0.4s ease;
+}
+
+.project-card:hover .h-full {
+    box-shadow: 0 20px 40px -10px rgba(59, 130, 246, 0.2);
+}
+
+.dark .project-card:hover .h-full {
+    box-shadow: 0 20px 40px -10px rgba(139, 92, 246, 0.2);
+}
+
+/* ============================================
+   SKILL TAG ANIMATIONS
+   ============================================ */
+.skill-tag {
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.skill-tag::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.skill-tag:hover::before {
+    left: 100%;
+}
+
+.skill-tag:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+}
+
+.dark .skill-tag:hover {
+    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.2);
+}
+
+/* ============================================
+   SOCIAL ICON ANIMATIONS
+   ============================================ */
+.social-icon {
+    position: relative;
+    overflow: hidden;
+}
+
+.social-icon::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.social-icon:hover::after {
+    opacity: 1;
+}
+
+/* ============================================
+   NAVBAR SCROLL EFFECT
+   ============================================ */
+#navbar.scrolled {
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.dark #navbar.scrolled {
+    background-color: rgba(15, 23, 42, 0.9);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* ============================================
+   NAV LINK UNDERLINE ANIMATION
+   ============================================ */
+.nav-link {
+    position: relative;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+    transition: width 0.3s ease;
+    border-radius: 2px;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+/* ============================================
+   THEME TOGGLE BUTTON ANIMATION
+   ============================================ */
+#theme-toggle {
+    position: relative;
+    overflow: hidden;
+}
+
+#theme-toggle::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #fbbf24, #f59e0b);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    border-radius: inherit;
+}
+
+#theme-toggle:hover::before {
+    opacity: 0.1;
+}
+
+/* ============================================
+   TIMELINE ANIMATION
+   ============================================ */
+#experience .absolute.w-0\.5 {
+    animation: timelineGrow 1s ease forwards;
+    transform-origin: top;
+}
+
+@keyframes timelineGrow {
+    from {
+        transform: scaleY(0);
+    }
+    to {
+        transform: scaleY(1);
+    }
+}
+
+/* Timeline dot pulse */
+#experience .rounded-full.bg-primary-500 {
+    animation: dotPulse 2s ease-in-out infinite;
+}
+
+@keyframes dotPulse {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4);
+    }
+    50% {
+        box-shadow: 0 0 0 8px rgba(59, 130, 246, 0);
+    }
+}
+
+.dark #experience .rounded-full.bg-primary-500 {
+    animation: dotPulseDark 2s ease-in-out infinite;
+}
+
+@keyframes dotPulseDark {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.4);
+    }
+    50% {
+        box-shadow: 0 0 0 8px rgba(139, 92, 246, 0);
+    }
+}
+
+/* ============================================
+   CONTACT CARD HOVER
+   ============================================ */
+#contact a.group {
+    transition: all 0.3s ease;
+}
+
+#contact a.group:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px -8px rgba(59, 130, 246, 0.2);
+}
+
+.dark #contact a.group:hover {
+    box-shadow: 0 12px 30px -8px rgba(139, 92, 246, 0.2);
+}
+
+/* ============================================
+   SCROLLBAR STYLING
+   ============================================ */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+    background: #475569;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+    background: #64748b;
+}
+
+/* ============================================
+   SELECTION STYLING
+   ============================================ */
+::selection {
+    background: rgba(59, 130, 246, 0.3);
+    color: inherit;
+}
+
+.dark ::selection {
+    background: rgba(139, 92, 246, 0.3);
+}
+
+/* ============================================
+   MOBILE MENU ANIMATION
+   ============================================ */
+#mobile-menu {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+    opacity: 0;
+}
+
+#mobile-menu.active {
+    max-height: 400px;
+    opacity: 1;
+}
+
+/* ============================================
+   HERO AVATAR GLOW
+   ============================================ */
+#about .relative.w-80 .relative.w-full {
+    position: relative;
+}
+
+#about .relative.w-80 .relative.w-full::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: inherit;
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6, #ec4899);
+    z-index: -1;
+    opacity: 0.5;
+    filter: blur(10px);
+    animation: avatarGlow 3s ease-in-out infinite;
+}
+
+@keyframes avatarGlow {
+    0%, 100% {
+        opacity: 0.3;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.6;
+        transform: scale(1.02);
+    }
+}
+
+/* ============================================
+   BUTTON SHINE EFFECT
+   ============================================ */
+a[href="#projects"].group,
+a[href="#contact"] {
+    position: relative;
+    overflow: hidden;
+}
+
+a[href="#projects"].group::before,
+a[href="#contact"]::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+a[href="#projects"].group:hover::before,
+a[href="#contact"]:hover::before {
+    left: 100%;
+}
+
+/* ============================================
+   SECTION DIVIDER
+   ============================================ */
+section {
+    position: relative;
+}
+
+section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(148, 163, 184, 0.3), transparent);
+}
+
+section:first-of-type::before {
+    display: none;
+}
+
+/* ============================================
+   RESPONSIVE ADJUSTMENTS
+   ============================================ */
+@media (max-width: 768px) {
+    .gradient-orb {
+        filter: blur(60px);
+        opacity: 0.3;
+    }
+    
+    .orb-1 {
+        width: 300px;
+        height: 300px;
+    }
+    
+    .orb-2 {
+        width: 250px;
+        height: 250px;
+    }
+    
+    .orb-3 {
+        width: 200px;
+        height: 200px;
+    }
+    
+    .animate-fade-in-up {
+        animation-duration: 0.6s;
+    }
+}
+
+/* ============================================
+   REDUCED MOTION
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    .scroll-reveal {
+        opacity: 1;
+        transform: none;
+    }
+    
+    .animate-fade-in-up {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+/* ============================================
+   PRINT STYLES
+   ============================================ */
+@media print {
+    .gradient-orb,
+    .mesh-bg,
+    #theme-toggle,
+    #mobile-menu-btn {
+        display: none !important;
+    }
+    
+    body {
+        background: white !important;
+        color: black !important;
+    }
+    
+    section {
+        page-break-inside: avoid;
+    }
+}

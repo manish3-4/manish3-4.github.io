@@ -1,6 +1,7 @@
 /**
- * Manish Kumar Portfolio - JavaScript
- * Features: Dark/Light theme toggle, scroll animations, mobile menu, smooth scrolling
+ * Manish Kumar Portfolio v2
+ * Features: Dark/Light theme, scroll animations, typed text, particles,
+ * custom cursor, spotlight, tilt, counter, toast, back-to-top
  */
 
 // ============================================
@@ -8,460 +9,513 @@
 // ============================================
 const ThemeManager = {
   init() {
-    const themeToggle = document.getElementById("theme-toggle");
-    const html = document.documentElement;
-
-    // Check for saved theme preference or system preference
-    const savedTheme = localStorage.getItem("theme");
-    const systemPrefersDark = window.matchMedia(
-      "(prefers-color-scheme: dark)",
-    ).matches;
-
-    if (savedTheme === "dark" || (!savedTheme && systemPrefersDark)) {
-      html.classList.add("dark");
-    } else {
-      html.classList.remove("dark");
+    const saved = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if (saved === 'dark' || (!saved && prefersDark)) {
+      document.documentElement.classList.add('dark');
     }
 
-    // Theme toggle click handler
-    themeToggle.addEventListener("click", () => {
-      html.classList.toggle("dark");
-      const isDark = html.classList.contains("dark");
-      localStorage.setItem("theme", isDark ? "dark" : "light");
+    // Auto-switch based on time (optional: uncomment to enable)
+    // const hour = new Date().getHours();
+    // if (!saved && (hour >= 19 || hour < 7)) {
+    //   document.documentElement.classList.add('dark');
+    // }
 
-      // Animate the toggle button
-      this.animateToggle(themeToggle);
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+      if (!localStorage.getItem('theme')) {
+        document.documentElement.classList.toggle('dark', e.matches);
+      }
     });
-
-    // Listen for system theme changes
-    window
-      .matchMedia("(prefers-color-scheme: dark)")
-      .addEventListener("change", (e) => {
-        if (!localStorage.getItem("theme")) {
-          if (e.matches) {
-            html.classList.add("dark");
-          } else {
-            html.classList.remove("dark");
-          }
-        }
-      });
   },
 
-  animateToggle(button) {
-    button.style.transform = "scale(0.9) rotate(180deg)";
-    setTimeout(() => {
-      button.style.transform = "scale(1) rotate(0deg)";
-    }, 300);
-  },
+  toggle() {
+    document.documentElement.classList.toggle('dark');
+    localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+  }
 };
 
 // ============================================
-// SCROLL ANIMATIONS (Intersection Observer)
+// SCROLL REVEAL
 // ============================================
-const ScrollAnimations = {
+const ScrollReveal = {
   init() {
-    const observerOptions = {
-      root: null,
-      rootMargin: "0px 0px -50px 0px",
-      threshold: 0.1,
-    };
-
     const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
+      entries.forEach(entry => {
         if (entry.isIntersecting) {
-          entry.target.classList.add("revealed");
-          // Optionally unobserve after animation
-          // observer.unobserve(entry.target);
+          entry.target.classList.add('visible');
         }
       });
-    }, observerOptions);
+    }, { rootMargin: '0px 0px -60px 0px', threshold: 0.1 });
 
-    // Observe all scroll-reveal elements
-    document.querySelectorAll(".scroll-reveal").forEach((el) => {
-      observer.observe(el);
-    });
-  },
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  }
 };
 
 // ============================================
-// NAVBAR SCROLL EFFECT
+// NAVBAR
 // ============================================
-const NavbarScroll = {
+const Navbar = {
   init() {
-    const navbar = document.getElementById("navbar");
+    const nav = document.getElementById('site-nav');
+    const toggle = document.getElementById('nav-toggle');
+    const links = document.getElementById('nav-links');
     let lastScroll = 0;
+    let ticking = false;
 
-    window.addEventListener("scroll", () => {
-      const currentScroll = window.pageYOffset;
-
-      // Add/remove scrolled class for styling
-      if (currentScroll > 50) {
-        navbar.classList.add("scrolled");
-      } else {
-        navbar.classList.remove("scrolled");
-      }
-
-      // Hide/show navbar on scroll direction
-      if (currentScroll > lastScroll && currentScroll > 100) {
-        navbar.style.transform = "translateY(-100%)";
-      } else {
-        navbar.style.transform = "translateY(0)";
-      }
-
-      lastScroll = currentScroll;
-    });
-  },
-};
-
-// ============================================
-// MOBILE MENU
-// ============================================
-const MobileMenu = {
-  init() {
-    const menuBtn = document.getElementById("mobile-menu-btn");
-    const mobileMenu = document.getElementById("mobile-menu");
-    const menuLinks = mobileMenu.querySelectorAll("a");
-    let isOpen = false;
-
-    menuBtn.addEventListener("click", () => {
-      isOpen = !isOpen;
-      if (isOpen) {
-        mobileMenu.classList.remove("hidden");
-        mobileMenu.classList.add("active");
-      } else {
-        mobileMenu.classList.remove("active");
-        setTimeout(() => {
-          mobileMenu.classList.add("hidden");
-        }, 300);
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          const y = window.pageYOffset;
+          if (y > 80) {
+            nav.style.background = 'var(--nav-bg)';
+          } else {
+            nav.style.background = '';
+          }
+          if (y > lastScroll && y > 200) {
+            nav.classList.add('hidden');
+          } else {
+            nav.classList.remove('hidden');
+          }
+          lastScroll = y;
+          ticking = false;
+        });
+        ticking = true;
       }
     });
 
-    // Close menu when clicking a link
-    menuLinks.forEach((link) => {
-      link.addEventListener("click", () => {
-        isOpen = false;
-        mobileMenu.classList.remove("active");
-        setTimeout(() => {
-          mobileMenu.classList.add("hidden");
-        }, 300);
+    if (toggle) {
+      toggle.addEventListener('click', () => {
+        toggle.classList.toggle('active');
+        links.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', links.classList.contains('open'));
       });
-    });
 
-    // Close menu when clicking outside
-    document.addEventListener("click", (e) => {
-      if (
-        isOpen &&
-        !mobileMenu.contains(e.target) &&
-        !menuBtn.contains(e.target)
-      ) {
-        isOpen = false;
-        mobileMenu.classList.remove("active");
-        setTimeout(() => {
-          mobileMenu.classList.add("hidden");
-        }, 300);
-      }
-    });
-  },
+      links.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+          toggle.classList.remove('active');
+          links.classList.remove('open');
+        });
+      });
+    }
+  }
 };
 
 // ============================================
-// SMOOTH SCROLL FOR ANCHOR LINKS
+// SMOOTH SCROLL
 // ============================================
 const SmoothScroll = {
   init() {
-    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-      anchor.addEventListener("click", function (e) {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
         e.preventDefault();
-        const targetId = this.getAttribute("href");
-        if (targetId === "#") return;
-
-        const targetElement = document.querySelector(targetId);
-        if (targetElement) {
-          const navbarHeight = document.getElementById("navbar").offsetHeight;
-          const targetPosition =
-            targetElement.getBoundingClientRect().top +
-            window.pageYOffset -
-            navbarHeight;
-
-          window.scrollTo({
-            top: targetPosition,
-            behavior: "smooth",
-          });
+        const id = this.getAttribute('href');
+        if (id === '#') return;
+        const el = document.querySelector(id);
+        if (el) {
+          const offset = document.getElementById('site-nav').offsetHeight;
+          const top = el.getBoundingClientRect().top + window.pageYOffset - offset;
+          window.scrollTo({ top, behavior: 'smooth' });
         }
       });
     });
-  },
+  }
 };
 
 // ============================================
-// ACTIVE NAV LINK HIGHLIGHTING
+// ACTIVE NAV LINK
 // ============================================
-const ActiveNavLink = {
+const ActiveNav = {
   init() {
-    const sections = document.querySelectorAll("section[id]");
-    const navLinks = document.querySelectorAll(".nav-link");
-
-    const observerOptions = {
-      root: null,
-      rootMargin: "-20% 0px -80% 0px",
-      threshold: 0,
-    };
+    const sections = document.querySelectorAll('section[id]');
+    const links = document.querySelectorAll('.nav-link');
 
     const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
+      entries.forEach(entry => {
         if (entry.isIntersecting) {
-          const id = entry.target.getAttribute("id");
-          navLinks.forEach((link) => {
-            link.classList.remove("text-primary-600", "dark:text-primary-400");
-            if (link.getAttribute("href") === `#${id}`) {
-              link.classList.add("text-primary-600", "dark:text-primary-400");
-            }
+          const id = entry.target.getAttribute('id');
+          links.forEach(link => {
+            link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
           });
         }
       });
-    }, observerOptions);
+    }, { rootMargin: '-30% 0px -70% 0px' });
 
-    sections.forEach((section) => observer.observe(section));
-  },
+    sections.forEach(s => observer.observe(s));
+  }
 };
 
 // ============================================
-// TYPING EFFECT FOR HERO (Optional enhancement)
+// TYPED TEXT EFFECT
 // ============================================
-const TypingEffect = {
+const TypedText = {
   init() {
-    const element = document.querySelector("#about h1 + p");
-    if (!element) return;
+    const el = document.getElementById('typed');
+    if (!el) return;
 
-    const text = element.textContent;
-    element.textContent = "";
-    element.style.minHeight = "2rem";
+    const phrases = [
+      'full-stack web apps.',
+      'secure REST APIs.',
+      'responsive UIs.',
+      'scalable solutions.',
+      'MERN stack projects.'
+    ];
 
-    let i = 0;
+    let phraseIdx = 0;
+    let charIdx = 0;
+    let isDeleting = false;
+    let delay = 100;
+
     const type = () => {
-      if (i < text.length) {
-        element.textContent += text.charAt(i);
-        i++;
-        setTimeout(type, 50);
+      const current = phrases[phraseIdx];
+
+      if (isDeleting) {
+        el.textContent = current.substring(0, charIdx - 1);
+        charIdx--;
+        delay = 50;
+      } else {
+        el.textContent = current.substring(0, charIdx + 1);
+        charIdx++;
+        delay = 80 + Math.random() * 40;
+      }
+
+      if (!isDeleting && charIdx === current.length) {
+        delay = 2000;
+        isDeleting = true;
+      } else if (isDeleting && charIdx === 0) {
+        isDeleting = false;
+        phraseIdx = (phraseIdx + 1) % phrases.length;
+        delay = 400;
+      }
+
+      setTimeout(type, delay);
+    };
+
+    setTimeout(type, 1200);
+  }
+};
+
+// ============================================
+// PARTICLE CANVAS
+// ============================================
+const Particles = {
+  init() {
+    const canvas = document.getElementById('particle-canvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    let mouse = { x: -1000, y: -1000 };
+    let animId;
+
+    const resize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
+
+    const createParticles = () => {
+      particles = [];
+      const count = Math.min(Math.floor((canvas.width * canvas.height) / 18000), 80);
+      for (let i = 0; i < count; i++) {
+        particles.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          vx: (Math.random() - 0.5) * 0.3,
+          vy: (Math.random() - 0.5) * 0.3,
+          r: Math.random() * 1.5 + 0.5,
+          opacity: Math.random() * 0.3 + 0.1
+        });
       }
     };
 
-    // Start typing after initial animations
-    setTimeout(type, 1000);
-  },
-};
+    const draw = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const isDark = document.documentElement.classList.contains('dark');
+      const color = isDark ? '255,255,255' : '0,0,0';
 
-// ============================================
-// PARALLAX EFFECT FOR BACKGROUND ORBS
-// ============================================
-const ParallaxEffect = {
-  init() {
-    const orbs = document.querySelectorAll(".gradient-orb");
+      particles.forEach((p, i) => {
+        p.x += p.vx;
+        p.y += p.vy;
 
-    window.addEventListener("scroll", () => {
-      const scrolled = window.pageYOffset;
+        if (p.x < 0) p.x = canvas.width;
+        if (p.x > canvas.width) p.x = 0;
+        if (p.y < 0) p.y = canvas.height;
+        if (p.y > canvas.height) p.y = 0;
 
-      orbs.forEach((orb, index) => {
-        const speed = 0.1 + index * 0.05;
-        const yPos = scrolled * speed;
-        orb.style.transform = `translateY(${yPos}px)`;
-      });
-    });
-  },
-};
+        // Mouse interaction
+        const dx = mouse.x - p.x;
+        const dy = mouse.y - p.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 120) {
+          p.x -= dx * 0.01;
+          p.y -= dy * 0.01;
+        }
 
-// ============================================
-// SKILL TAG COUNTER ANIMATION
-// ============================================
-const SkillCounter = {
-  init() {
-    const skillCards = document.querySelectorAll(".skill-card");
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${color},${p.opacity})`;
+        ctx.fill();
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const tags = entry.target.querySelectorAll(".skill-tag");
-            tags.forEach((tag, index) => {
-              tag.style.opacity = "0";
-              tag.style.transform = "translateY(10px)";
-              setTimeout(() => {
-                tag.style.transition = "all 0.3s ease";
-                tag.style.opacity = "1";
-                tag.style.transform = "translateY(0)";
-              }, index * 50);
-            });
-            observer.unobserve(entry.target);
+        // Connect nearby particles
+        for (let j = i + 1; j < particles.length; j++) {
+          const p2 = particles[j];
+          const d = Math.hypot(p.x - p2.x, p.y - p2.y);
+          if (d < 120) {
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(p2.x, p2.y);
+            ctx.strokeStyle = `rgba(${color},${0.06 * (1 - d / 120)})`;
+            ctx.lineWidth = 0.5;
+            ctx.stroke();
           }
-        });
-      },
-      { threshold: 0.3 },
-    );
-
-    skillCards.forEach((card) => observer.observe(card));
-  },
-};
-
-// ============================================
-// PROJECT CARD 3D TILT EFFECT
-// ============================================
-const TiltEffect = {
-  init() {
-    const cards = document.querySelectorAll(".project-card");
-
-    cards.forEach((card) => {
-      card.addEventListener("mousemove", (e) => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-
-        const rotateX = (y - centerY) / 20;
-        const rotateY = (centerX - x) / 20;
-
-        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px)`;
+        }
       });
 
-      card.addEventListener("mouseleave", () => {
-        card.style.transform =
-          "perspective(1000px) rotateX(0) rotateY(0) translateY(0)";
-        card.style.transition = "transform 0.5s ease";
-      });
+      animId = requestAnimationFrame(draw);
+    };
 
-      card.addEventListener("mouseenter", () => {
-        card.style.transition = "transform 0.1s ease";
-      });
+    resize();
+    createParticles();
+    draw();
+
+    window.addEventListener('resize', () => {
+      resize();
+      createParticles();
     });
-  },
-};
 
-// ============================================
-// LOADING ANIMATION
-// ============================================
-const LoadingAnimation = {
-  init() {
-    document.body.style.opacity = "0";
-    document.body.style.transition = "opacity 0.5s ease";
-
-    window.addEventListener("load", () => {
-      setTimeout(() => {
-        document.body.style.opacity = "1";
-      }, 100);
+    document.addEventListener('mousemove', (e) => {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
     });
-  },
+  }
 };
 
 // ============================================
-// CURSOR GLOW EFFECT (Desktop only)
+// CUSTOM CURSOR
 // ============================================
-const CursorGlow = {
+const CustomCursor = {
   init() {
-    // Only on non-touch devices
-    if (window.matchMedia("(pointer: coarse)").matches) return;
+    if (window.matchMedia('(pointer: coarse)').matches) return;
 
-    const glow = document.createElement("div");
-    glow.id = "cursor-glow";
-    glow.style.cssText = `
-            position: fixed;
-            width: 300px;
-            height: 300px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(59, 130, 246, 0.08) 0%, transparent 70%);
-            pointer-events: none;
-            z-index: 9999;
-            transform: translate(-50%, -50%);
-            transition: opacity 0.3s ease;
-        `;
-    document.body.appendChild(glow);
+    const glow = document.querySelector('.cursor-glow');
+    const dot = document.querySelector('.cursor-dot');
+    const ring = document.querySelector('.cursor-ring');
+    if (!glow || !dot || !ring) return;
 
-    let mouseX = 0,
-      mouseY = 0;
-    let currentX = 0,
-      currentY = 0;
+    let mx = 0, my = 0, cx = 0, cy = 0;
 
-    document.addEventListener("mousemove", (e) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
+    document.addEventListener('mousemove', (e) => {
+      mx = e.clientX;
+      my = e.clientY;
+      dot.style.left = mx + 'px';
+      dot.style.top = my + 'px';
     });
 
     const animate = () => {
-      currentX += (mouseX - currentX) * 0.1;
-      currentY += (mouseY - currentY) * 0.1;
-      glow.style.left = currentX + "px";
-      glow.style.top = currentY + "px";
+      cx += (mx - cx) * 0.12;
+      cy += (my - cy) * 0.12;
+      glow.style.left = cx + 'px';
+      glow.style.top = cy + 'px';
+      ring.style.left = cx + 'px';
+      ring.style.top = cy + 'px';
       requestAnimationFrame(animate);
     };
     animate();
 
-    // Hide glow when mouse leaves window
-    document.addEventListener("mouseleave", () => {
-      glow.style.opacity = "0";
+    const addHover = () => { dot.classList.add('hovering'); ring.classList.add('hovering'); };
+    const removeHover = () => { dot.classList.remove('hovering'); ring.classList.remove('hovering'); };
+
+    document.querySelectorAll('a, button, .project-card, .skill-panel, .ach-card').forEach(el => {
+      el.addEventListener('mouseenter', addHover);
+      el.addEventListener('mouseleave', removeHover);
     });
-    document.addEventListener("mouseenter", () => {
-      glow.style.opacity = "1";
+
+    document.addEventListener('mouseleave', () => {
+      glow.style.opacity = '0';
+      dot.style.opacity = '0';
+      ring.style.opacity = '0';
     });
-  },
+    document.addEventListener('mouseenter', () => {
+      glow.style.opacity = '1';
+      dot.style.opacity = '1';
+      ring.style.opacity = '0.5';
+    });
+  }
 };
 
 // ============================================
-// INITIALIZE ALL MODULES
+// SCROLL PROGRESS BAR
 // ============================================
-document.addEventListener("DOMContentLoaded", () => {
+const ScrollProgress = {
+  init() {
+    const bar = document.querySelector('.progress-bar');
+    if (!bar) return;
+
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.pageYOffset;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      bar.style.width = progress + '%';
+    });
+  }
+};
+
+// ============================================
+// COUNTER ANIMATION
+// ============================================
+const Counter = {
+  init() {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const spans = entry.target.querySelectorAll('[data-count]');
+          spans.forEach(span => {
+            const target = parseInt(span.dataset.count);
+            const duration = 2000;
+            const start = performance.now();
+
+            const update = (now) => {
+              const elapsed = now - start;
+              const progress = Math.min(elapsed / duration, 1);
+              const eased = 1 - Math.pow(1 - progress, 3);
+              span.textContent = Math.round(eased * target);
+              if (progress < 1) requestAnimationFrame(update);
+            };
+            requestAnimationFrame(update);
+          });
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    const stats = document.getElementById('stats');
+    if (stats) observer.observe(stats);
+  }
+};
+
+// ============================================
+// SPOTLIGHT EFFECT
+// ============================================
+const Spotlight = {
+  init() {
+    document.querySelectorAll('.spot').forEach(el => {
+      el.addEventListener('mousemove', (e) => {
+        const rect = el.getBoundingClientRect();
+        el.style.setProperty('--mx', (e.clientX - rect.left) + 'px');
+        el.style.setProperty('--my', (e.clientY - rect.top) + 'px');
+      });
+    });
+  }
+};
+
+// ============================================
+// TILT EFFECT
+// ============================================
+const Tilt = {
+  init() {
+    document.querySelectorAll('.tilt').forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const cx = rect.width / 2;
+        const cy = rect.height / 2;
+        const rx = (y - cy) / 25;
+        const ry = (cx - x) / 25;
+        card.style.transform = `perspective(800px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-4px)`;
+      });
+
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'perspective(800px) rotateX(0) rotateY(0) translateY(0)';
+        card.style.transition = 'transform 0.5s var(--ease)';
+      });
+
+      card.addEventListener('mouseenter', () => {
+        card.style.transition = 'transform 0.1s ease';
+      });
+    });
+  }
+};
+
+// ============================================
+// COPY EMAIL + TOAST
+// ============================================
+const CopyEmail = {
+  init() {
+    document.querySelectorAll('[data-copy]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const text = btn.dataset.copy;
+        navigator.clipboard.writeText(text).then(() => {
+          Toast.show('Email copied to clipboard!');
+        }).catch(() => {
+          Toast.show('Failed to copy');
+        });
+      });
+    });
+  }
+};
+
+const Toast = {
+  show(message, duration = 3000) {
+    const wrap = document.getElementById('toast-wrap');
+    if (!wrap) return;
+    const toast = document.createElement('div');
+    toast.className = 'toast';
+    toast.textContent = message;
+    wrap.appendChild(toast);
+    setTimeout(() => {
+      toast.classList.add('out');
+      setTimeout(() => toast.remove(), 300);
+    }, duration);
+  }
+};
+
+// ============================================
+// BACK TO TOP
+// ============================================
+const BackToTop = {
+  init() {
+    const btn = document.getElementById('to-top');
+    if (!btn) return;
+
+    window.addEventListener('scroll', () => {
+      btn.classList.toggle('visible', window.pageYOffset > 500);
+    });
+
+    btn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+};
+
+// ============================================
+// LOADING
+// ============================================
+const Loader = {
+  init() {
+    document.body.style.opacity = '0';
+    document.body.style.transition = 'opacity 0.5s ease';
+    window.addEventListener('load', () => {
+      setTimeout(() => { document.body.style.opacity = '1'; }, 50);
+    });
+  }
+};
+
+// ============================================
+// INITIALIZE
+// ============================================
+document.addEventListener('DOMContentLoaded', () => {
+  Loader.init();
   ThemeManager.init();
-  ScrollAnimations.init();
-  NavbarScroll.init();
-  MobileMenu.init();
+  ScrollReveal.init();
+  Navbar.init();
   SmoothScroll.init();
-  ActiveNavLink.init();
-  SkillCounter.init();
-  TiltEffect.init();
-  LoadingAnimation.init();
-
-  // Optional: Uncomment to enable typing effect
-  // TypingEffect.init();
-
-  // Optional: Uncomment to enable cursor glow
-  // CursorGlow.init();
+  ActiveNav.init();
+  TypedText.init();
+  Particles.init();
+  CustomCursor.init();
+  ScrollProgress.init();
+  Counter.init();
+  Spotlight.init();
+  Tilt.init();
+  CopyEmail.init();
+  BackToTop.init();
 });
-
-// ============================================
-// UTILITY FUNCTIONS
-// ============================================
-
-// Debounce function for performance
-function debounce(func, wait) {
-  let timeout;
-  return function executedFunction(...args) {
-    const later = () => {
-      clearTimeout(timeout);
-      func(...args);
-    };
-    clearTimeout(timeout);
-    timeout = setTimeout(later, wait);
-  };
-}
-
-// Throttle function for scroll events
-function throttle(func, limit) {
-  let inThrottle;
-  return function (...args) {
-    if (!inThrottle) {
-      func.apply(this, args);
-      inThrottle = true;
-      setTimeout(() => (inThrottle = false), limit);
-    }
-  };
-}
-
-// Export for potential module usage
-if (typeof module !== "undefined" && module.exports) {
-  module.exports = {
-    ThemeManager,
-    ScrollAnimations,
-    NavbarScroll,
-    MobileMenu,
-    SmoothScroll,
-  };
-}

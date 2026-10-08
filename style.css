@@ -1474,6 +1474,7 @@ button {
   font-size: 0.8rem;
   color: var(--text-muted);
   font-family: var(--font-mono);
+  margin-top: 20px;
 }
 
 @media (max-width: 640px) {

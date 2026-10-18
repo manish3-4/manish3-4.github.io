@@ -57,6 +57,7 @@
 html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
+  font-size: 105%;
 }
 
 body {
@@ -99,7 +100,7 @@ button {
 /* ---------- CONTAINER ---------- */
 .container {
   width: 100%;
-  max-width: 1200px;
+  max-width: 1500px;
   margin: 0 auto;
   padding: 0 24px;
 }
@@ -375,6 +376,58 @@ button {
   gap: 12px;
 }
 
+.theme-toggle {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--glass-bg);
+  color: var(--text);
+  transition: all 0.3s var(--ease);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.theme-toggle:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.theme-toggle:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.theme-icon {
+  width: 18px;
+  height: 18px;
+  display: block;
+  transition: opacity 0.3s var(--ease), transform 0.3s var(--ease);
+}
+
+.theme-icon-sun {
+  opacity: 1;
+}
+
+.theme-icon-moon {
+  opacity: 0;
+  position: absolute;
+}
+
+.dark .theme-icon-sun {
+  opacity: 0;
+  transform: rotate(90deg) scale(0.8);
+}
+
+.dark .theme-icon-moon {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+}
+
 .nav-toggle {
   display: none;
   flex-direction: column;
@@ -502,7 +555,7 @@ button {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 100px 0 60px;
+  padding: 100px 0 0;
 }
 
 .hero-meta {
@@ -544,11 +597,11 @@ button {
 @media (max-width: 900px) {
   .hero-grid {
     grid-template-columns: 1fr;
-    gap: 40px;
+    gap: 20px;
   }
 }
 
-.hero-copy {
+.hero_copy {
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -636,7 +689,7 @@ button {
   font-size: 1rem;
   line-height: 1.7;
   color: var(--text-secondary);
-  max-width: 520px;
+  max-width: 720px;
 }
 
 .hero-sub strong {
@@ -646,7 +699,7 @@ button {
 .hero-actions {
   display: flex;
   gap: 12px;
-  flex-wrap: wrap;
+  flex-wrap: none;
 }
 
 .socials {
@@ -746,6 +799,7 @@ button {
 
 .code-body code {
   color: rgba(255, 255, 255, 0.7);
+  white-space: normal;
 }
 
 .cl {
@@ -786,7 +840,7 @@ button {
   font-size: 0.75rem;
   font-family: var(--font-mono);
   color: var(--text-muted);
-  margin: 40px 0 24px;
+  margin: 30px 0 20px;
   animation: scrollBounce 2s ease-in-out infinite;
 }
 
@@ -807,6 +861,7 @@ button {
   gap: 1px;
   border-radius: var(--radius);
   overflow: hidden;
+  margin: 12px 0;
 }
 
 .stat {
@@ -837,6 +892,18 @@ button {
   margin-top: 4px;
 }
 
+.coding-links {
+  display: flex;
+  justify-content: space-around;
+  gap: 12px;
+}
+
+.coding {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: #8d95f8;
+  border-bottom: 1px solid var(--border);
+}
 @media (max-width: 640px) {
   .stats-strip {
     grid-template-columns: repeat(2, 1fr);
@@ -845,8 +912,9 @@ button {
 
 /* ---------- SECTIONS ---------- */
 .section {
-  padding: 100px 0;
+  padding: 25px 0;
   position: relative;
+
 }
 
 .section::before {
@@ -856,12 +924,12 @@ button {
   left: 50%;
   transform: translateX(-50%);
   width: 60%;
-  height: 1px;
+  height: 0px;
   background: linear-gradient(90deg, transparent, var(--border), transparent);
 }
 
 .section-head {
-  margin-bottom: 56px;
+  margin-bottom: 20px;
 }
 
 .eyebrow {
@@ -929,11 +997,29 @@ button {
 }
 
 .fact-card {
+  min-width: 0;
   padding: 24px;
   border-radius: var(--radius);
   display: flex;
   flex-direction: column;
   gap: 16px;
+}
+
+.fact-image {
+  width: min(100%, 220px);
+  aspect-ratio: 1;
+  align-self: center;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+}
+
+.fact-content {
+  min-width: 0;
+}
+
+.fact-text {
+  line-height: 1.6;
+  overflow-wrap: anywhere;
 }
 
 .fact {
@@ -982,7 +1068,7 @@ button {
 /* ---------- EXPERIENCE TIMELINE ---------- */
 .timeline {
   position: relative;
-  max-width: 800px;
+  max-width: 1200px;
 }
 
 .t-item {
@@ -1102,6 +1188,7 @@ button {
 /* ---------- MARQUEE ---------- */
 .marquee {
   overflow: hidden;
+  margin: 30px 0;
   padding: 20px 0;
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
@@ -1188,7 +1275,7 @@ button {
 }
 
 .p-link svg {
-  width: 16px;
+  width: 25px;
   height: 16px;
 }
 
@@ -1223,6 +1310,12 @@ button {
   flex-direction: column;
   gap: 6px;
   margin-bottom: 16px;
+}
+
+.p-image {
+  width: 100%;
+  border-radius: var(--radius);
+  margin-top: 2.5rem;
 }
 
 .p-highlights li {

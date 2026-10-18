@@ -26,6 +26,22 @@ const ThemeManager = {
         document.documentElement.classList.toggle('dark', e.matches);
       }
     });
+
+    const toggleButton = document.getElementById('theme-toggle');
+    if (!toggleButton) return;
+
+    const syncToggleUi = () => {
+      const isDark = document.documentElement.classList.contains('dark');
+      toggleButton.setAttribute('aria-pressed', String(isDark));
+      toggleButton.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+    };
+
+    toggleButton.addEventListener('click', () => {
+      ThemeManager.toggle();
+      syncToggleUi();
+    });
+
+    syncToggleUi();
   },
 
   toggle() {
